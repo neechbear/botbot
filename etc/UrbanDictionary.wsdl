@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:si="http://soapinterop.org/xsd" xmlns:tns="urn:UrbanSearch" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:UrbanSearch"><types><xsd:schema targetNamespace="urn:UrbanSearch"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="Definition">
+  <xsd:all>
+   <xsd:element name="word" type="xsd:string"/>
+   <xsd:element name="definition" type="xsd:string"/>
+   <xsd:element name="example" type="xsd:string"/>
+   <xsd:element name="author" type="xsd:string"/>
+   <xsd:element name="url" type="xsd:string"/>
+   <xsd:element name="defid" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="DefinitionArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Definition[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="WordArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+</xsd:schema>
+</types><message name="lookupRequest"><part name="key" type="xsd:string" /><part name="term" type="xsd:string" /></message><message name="lookupResponse"><part name="return" type="tns:DefinitionArray" /></message><message name="nearbyRequest"><part name="key" type="xsd:string" /><part name="term" type="xsd:string" /></message><message name="nearbyResponse"><part name="return" type="tns:WordArray" /></message><message name="count_definitionsRequest"><part name="key" type="xsd:string" /><part name="term" type="xsd:string" /></message><message name="count_definitionsResponse"><part name="return" type="xsd:integer" /></message><message name="get_daily_wordRequest"></message><message name="get_daily_wordResponse"><part name="return" type="tns:Definition" /></message><portType name="UrbanSearchPortType"><operation name="lookup"><input message="tns:lookupRequest"/><output message="tns:lookupResponse"/></operation><operation name="nearby"><input message="tns:nearbyRequest"/><output message="tns:nearbyResponse"/></operation><operation name="count_definitions"><input message="tns:count_definitionsRequest"/><output message="tns:count_definitionsResponse"/></operation><operation name="get_daily_word"><input message="tns:get_daily_wordRequest"/><output message="tns:get_daily_wordResponse"/></operation></portType><binding name="UrbanSearchBinding" type="tns:UrbanSearchPortType"><soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/><operation name="lookup"><soap:operation soapAction="http://api.urbandictionary.com/soap/lookup" style="rpc"/><input><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input><output><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output></operation><operation name="nearby"><soap:operation soapAction="http://api.urbandictionary.com/soap/nearby" style="rpc"/><input><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input><output><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output></operation><operation name="count_definitions"><soap:operation soapAction="http://api.urbandictionary.com/soap/count_definitions" style="rpc"/><input><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input><output><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output></operation><operation name="get_daily_word"><soap:operation soapAction="http://api.urbandictionary.com/soap/get_daily_word" style="rpc"/><input><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input><output><soap:body use="encoded" namespace="urn:UrbanSearch" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output></operation></binding><service name="UrbanSearch"><port name="UrbanSearchPort" binding="tns:UrbanSearchBinding"><soap:address location="http://api.urbandictionary.com/soap"/></port></service></definitions>
